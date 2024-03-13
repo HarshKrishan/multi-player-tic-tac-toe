@@ -27,6 +27,11 @@ export default function Home() {
       setShowBoard(false);
     })
 
+    socket.on("roomFull",()=>{
+      alert("Room is full, kindly join another room or create one first!");
+      setShowBoard(false);
+    })
+
     return () => {
       socket.off("opponent joined");
       socket.off("roomNotFound");

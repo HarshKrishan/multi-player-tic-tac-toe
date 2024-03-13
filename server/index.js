@@ -28,12 +28,17 @@ io.on("connection", (socket) => {
       socket.emit("roomNotFound");
       return;
     }
+
+    if(io.sockets.adapter.rooms.get(room).size >= 2){
+      socket.emit("roomFull");
+      return;
+    }
     // console.log("joined room", room);
     socket.join(room);
     socket.to(room).emit("opponent joined");
   });
   socket.on("createRoom", ({ name, room }) => {
-    console.log("created room", room);
+    // console.log("created room", room);
     socket.join(room);
   });
 
